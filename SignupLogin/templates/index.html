@@ -1,0 +1,22 @@
+{% extends "home.html" %} {% block content %}
+<div class="container d-flex justify-content-between pt-4">
+  <h4>Hi {{ username }} explore the unique styles!</h4>
+  <h6>time visited: {{ visits }}</h6>
+  <a href="{% url 'logout' %}">logout</a>
+</div>
+<div class="container d-flex justify-content-center">
+  <div class="row">
+    {% for item in items %}
+    <div class="card" style="width: 15rem; height: 25rem;">
+      <img src="{{item.image.url}}" class="card-img-top" alt="{{ item.title }}"/>
+      <div class="card-body">
+        <h4 class="card-title">{{ item.title }}</h4>
+        <h6>Price: {{ item.price }}</h6>
+        <a href="#" class="btn btn-primary">Buy</a>
+      </div>
+    </div>
+    {% endfor %} {% endblock content %}
+  </div>
+</div>
+
+
