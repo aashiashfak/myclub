@@ -1,8 +1,44 @@
-form {
-    max-width: 400px;
-    margin: auto;
+
+.form-container {
+  max-width: 400px;
+  margin: auto;
 }
 
-input, button {
-    margin-bottom: 10px;
+.form-card {
+  border: 2px solid #17a2b8;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-header {
+  background-color: #17a2b8;
+  color: #fff;
+  border-bottom: none;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 1rem;
+}
+
+.form-title {
+  font-size: 1.5rem;
+}
+
+.form-body {
+  padding: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* Style for the submit button */
+.btn-primary {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
 }

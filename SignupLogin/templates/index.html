@@ -1,22 +1,50 @@
-{% extends "home.html" %} {% block content %}
-<div class="container d-flex justify-content-between pt-4">
-  <h4>Hi {{ username }} explore the unique styles!</h4>
-  <h6>time visited: {{ visits }}</h6>
-  <a href="{% url 'logout' %}">logout</a>
-</div>
-<div class="container d-flex justify-content-center">
-  <div class="row">
-    {% for item in items %}
-    <div class="card" style="width: 15rem; height: 25rem;">
-      <img src="{{item.image.url}}" class="card-img-top" alt="{{ item.title }}"/>
-      <div class="card-body">
-        <h4 class="card-title">{{ item.title }}</h4>
-        <h6>Price: {{ item.price }}</h6>
-        <a href="#" class="btn btn-primary">Buy</a>
+{% extends "home.html" %}
+
+{% block content %}
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-sticky top-0">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">MyClub</a>
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="{% url 'logout' %}" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout">
+              <ion-icon name="power"></ion-icon>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
-    {% endfor %} {% endblock content %}
+  </nav>
+
+  <div class="container mt-4 text-center">
+    <h4 class="text-primary">Welcome, {{ username }}!</h4>
+    <p class="text-muted">Explore our unique styles and find your favorites.</p>
+    <p class="text-muted">Time visited: {{ visits }}</p>
   </div>
-</div>
 
+  <div class="container mt-4 d-flex justify-content-center">
+    <div class="row">
+      {% for item in items %}
+        <div class="col-md-3 mb-4">
+          <div class="card border-0 shadow-sm">
+            <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.title }}">
+            <div class="card-body">
+              <h5 class="card-title" style="font-size: 1rem;">{{ item.title }}</h5>
+              <p class="card-text text-muted">Price: {{ item.price }}</p>
+              <a href="#" class="btn btn-primary btn-sm">Buy Now</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+      });
+    });
+  </script>
+{% endblock content %}
