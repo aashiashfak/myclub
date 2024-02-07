@@ -110,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',  # Update with your Redis server details
+        'LOCATION': 'redis://myclub-1.onrender.com:6379/1',  # Update with your Redis server details
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
