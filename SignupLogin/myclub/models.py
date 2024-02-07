@@ -8,5 +8,10 @@ class Products(models.Model):
     image = models.ImageField(upload_to='static/images')
     
 
+
+    
     def __str__(self) -> str:
         return self.title
+
+
+

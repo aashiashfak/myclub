@@ -1,57 +1,73 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from . forms import CreateUserForm, LoginForm
-from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from .forms import CreateUserForm, LoginForm
+from django.contrib.auth import authenticate, login ,logout
 from django.contrib.auth.decorators import login_required
-# from . models import Products
 
 
-
-# Create your views here.
 def home_page(request):
+    """
+    Render the home page.
+    """
+    if 'username' in request.session:
+        return redirect('index')
+   
     return render(request, 'home.html')
 
+
 def signup(request):
+    """
+    Handle user signup.
+    Redirect to 'index' if the user is already logged in.
+    """
+
+    form = CreateUserForm()
 
     if 'username' in request.session:
-        return redirect('index') 
-    form = CreateUserForm()
-    if request.method == 'POST':  
+        return redirect('index')
+
+    if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')  
-    context = {'signupform': form}  
+            return redirect('login')
+            
+    context = {'signupform': form}
     return render(request, 'signup.html', context)
 
-def userlogin(request):
 
+def user_login(request):
+    """
+    Handle user login.
+    Redirect to 'index' if the user is already logged in.
+    """
     if 'username' in request.session:
-        return redirect('index') 
+        return redirect('index')
     
     form = LoginForm()
 
-    if request.method =="POST":
+    if request.method == "POST":
         form = LoginForm(request, request.POST)
-
         if form.is_valid():
             username = request.POST['username']
             password = request.POST['password']
-            user = authenticate(request,username=username, password=password)
-            
+            user = authenticate(request, username=username, password=password)
             if user is not None:
                 request.session['username'] = username
-                auth_login(request, user)
+                login(request, user)
                 return redirect('myclub/index')
             
-        
     context = {'loginform': form}
-    return render(request, 'login.html',context)
+    return render(request, 'login.html', context)
 
-    
+
 @login_required(login_url='login')
-def userlogout(request):
-    auth_logout(request)
-    response=redirect('home')
+def user_logout(request):
+    """
+    Handle user logout.
+    Log the user out and redirect to 'home'.
+    """
+    logout(request)
+    response = redirect('home')
     response.delete_cookie('visits')
     return response
