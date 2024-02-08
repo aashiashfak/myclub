@@ -56,7 +56,13 @@ def user_login(request):
                 request.session['username'] = username
                 login(request, user)
                 return redirect('myclub/index')
-            
+            else:
+                # Authentication failed, add a custom error to the form
+                form.add_error(None, 'Invalid username or password')  # General error for the entire form
+                form.add_error('username', 'Invalid username or password')
+                form.add_error('password', 'Invalid username or password')
+                print(form.errors)
+                
     context = {'loginform': form}
     return render(request, 'login.html', context)
 

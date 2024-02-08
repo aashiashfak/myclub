@@ -7,16 +7,19 @@
     <div class="card-header text-center p-0 pt-2">
       <h5 class="card-title mb-4 text-center" style="font-size: 1.5rem">Log In</h5>
     </div>
-    <div class="card-body p-3 mt-5">
+    <div class="card-body p-3 mt-3">
 
       <form action="" method="POST" autocomplete="off" class="form">
         {% csrf_token %} 
+        {% if loginform.non_field_errors %}
+        <div class="text-danger small">{{ loginform.non_field_errors }}</div>
+        {% endif %}
 
         <div class="mb-1">
           <label for="id_username" class="form-label">Username</label>
           <input type="text" name="username" id="id_username" class="form-control">
           {% if loginform.username.errors %}
-            <div class="text-danger small">{{ loginform.username.errors }}</div>
+          <div class="text-danger small">{{ loginform.username.errors }}</div>
           {% endif %}
         </div>
 
@@ -24,13 +27,14 @@
           <label for="id_password" class="form-label">Password</label>
           <input type="password" name="password" id="id_password" class="form-control">
           {% if loginform.password.errors %}
-            <div class="text-danger small">{{ loginform.password.errors }}</div>
+          <div class="text-danger small">{{ loginform.password.errors }}</div>
           {% endif %}
         </div>
 
         <button class="btn btn-success w-100" type="submit">Log In</button>
         <p class="small mt-3 text-center">Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
       </form>
+
     </div>
   </div>
 </div>
