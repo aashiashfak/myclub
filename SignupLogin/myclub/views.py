@@ -41,3 +41,9 @@ def index(request):
     response = render(request, 'index.html', context)
     response.set_cookie('visits', visits)
     return response
+
+
+import os
+import redis
+
+r = redis.from_url(os.environ['REDIS_URL'])
