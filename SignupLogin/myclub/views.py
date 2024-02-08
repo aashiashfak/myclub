@@ -43,9 +43,4 @@ def index(request):
     return response
 
 
-import os
-import redis
 
-r = redis.from_url(os.environ['REDIS_URL'])
-r.set('key', 'redis-py')
-r.get('key')
