@@ -1,7 +1,10 @@
 {% extends "home.html" %}
 
+
 {% block content %}
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-sticky top-0 my-nav">
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark position-sticky top-0 my-nav" style="background-color:#343a40">
     <div class="container-fluid d-flex justify-content-between">
       <a class="navbar-brand" href="#">MyClub</a>
       <a href="{% url 'logout' %}" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout">
@@ -9,9 +12,36 @@
       </a>
     </div>
   </nav>
+   {% if messages %}
+    <!-- Modal -->
+    <div class="modal fade " id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+      <div class="modal-dialog ">
+        <div class="modal-content text-danger bg-dark">
+          <div class="d-flex p-3 justify-content-between">
+            <h5 class="modal-title " id="errorModalLabel">Error</h5>
+            <button type="button" class="btn-close bg-danger border-dark" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body ">
+            {% for msg in messages %}
+              {{ msg }}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trigger the modal with JavaScript -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var myModal = new bootstrap.Modal(document.getElementById('errorModal'));
+        myModal.show();
+      });
+    </script>
+  {% endif %}
+ 
 
   <div class="container mt-4 text-center">
-    <h4 class="text-primary">Welcome, {{ username }}!</h4>
+    <h4 class="text-dark">Welcome, {{ username }}!</h4>
     <p class="text-muted">Explore our unique styles and find your favorites.</p>
     <p class="text-muted">Time visited: {{ visits }}</p>
   </div>
@@ -20,14 +50,14 @@
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
       {% for product in product_list %}
         <div class="col">
-          <div class="card border-0 shadow-sm">
+          <div class="card border-0 shadow ">
             {% if product.image %}
                 <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
             {% endif %}  
-            <div class="card-body">
-              <h5 class="card-title" style="font-size: 1rem;">{{ product.title }}</h5>
+            <div class="card-body text-center">
+              <h5 class="card-title" style="font-size: 1.5rem;">{{ product.title }}</h5>
               <p class="card-text text-muted">Price: {{ product.price }}</p>
-              <a href="#" class="btn btn-primary btn-sm">Buy Now</a>
+              <a href="#" class="btn btn-dark ">Buy Now</a>
             </div>
           </div>
         </div>

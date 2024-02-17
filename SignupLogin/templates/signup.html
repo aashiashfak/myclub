@@ -13,38 +13,39 @@
         {% csrf_token %} 
 
         <div class="mb-2">
-          <label for="id_username" class="form-label">Username</label>
-          <input type="text" name="username" id="id_username" class="form-control">
-          {% if signupform.username.errors %}
-            <div class="text-danger small">{{ signupform.username.errors }}</div>
-          {% endif %}
-        </div>
+  <label for="id_username" class="form-label bb">Username</label>
+  <input type="text" name="username" id="id_username" class="form-control inpfs" placeholder="Enter alphanumeric username (max 12 characters)">
+  {% if signupform.username.errors %}
+    <div class="text-danger small">{{ signupform.username.errors }}</div>
+  {% endif %}
+</div>
 
-        <div class="mb-1">
-          <label for="id_email" class="form-label">Email</label>
-          <input type="email" name="email" id="id_email" class="form-control">
-          {% if signupform.email.errors %}
-            <div class="text-danger small">{{ signupform.email.errors }}</div>
-          {% endif %}
-        </div>
+<div class="mb-1">
+  <label for="id_email" class="form-label bb">Email</label>
+  <input type="text" name="email" id="id_email" class="form-control inpfs" placeholder="Enter a valid email address">
+  {% if signupform.email.errors %}
+    <div class="text-danger small">{{ signupform.email.errors }}</div>
+  {% endif %}
+</div>
 
-        <div class="mb-1">
-          <label for="id_password1" class="form-label">Password</label>
-          <input type="password" name="password1" id="id_password1" class="form-control">
-          {% if signupform.password1.errors %}
-            <div class="text-danger small">{{ signupform.password1.errors }}</div>
-          {% endif %}
-        </div>
+<div class="mb-1">
+  <label for="id_password1" class="form-label bb">Password</label>
+  <input type="password" name="password1" id="id_password1" class="form-control inpfs" placeholder="Enter a password (min 8 characters)">
+  {% if signupform.password1.errors %}
+    <div class="text-danger small">{{ signupform.password1.errors }}</div>
+  {% endif %}
+</div>
 
-        <div class="mb-3 > ">
-          <label for="id_password2" class="form-label">Confirm Password</label>
-          <input type="password" name="password2" id="id_password2" class="form-control">
-          {% if signupform.password2.errors %}
-            <div class="text-danger small">{{ signupform.password2.errors }}</div>
-          {% endif %}
-        </div>
+<div class="mb-3">
+  <label for="id_password2" class="form-label bb">Confirm Password</label>
+  <input type="password" name="password2" id="id_password2" class="form-control inpfs" placeholder="Confirm your password">
+  {% if signupform.password2.errors %}
+    <div class="text-danger small">{{ signupform.password2.errors }}</div>
+  {% endif %}
+</div>
 
-        <button class="btn btn-success w-100" type="submit">Create User</button>
+
+        <button class="btn btn-success w-100 bb" type="submit">Create User</button>
 
         <p class="small mt-3 text-center">Already have an account? <a href="{% url 'login' %}">Log In</a></p>
       </form>

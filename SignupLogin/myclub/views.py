@@ -1,10 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from .models import Products
+from django.contrib.auth.models import User
+from django.views.decorators.cache import never_cache
+
 # from django.views.decorators.cache import cache_page
 
+
 # Create your views here.
+
+
+
 
 def get_product_list():
     """
@@ -23,6 +31,8 @@ def get_product_list():
     return product_list
 
 # @cache_page(timeout=60*1) -if u need to cache the entire page
+
+@never_cache
 @login_required(login_url='login')
 def index(request):
     """
@@ -41,6 +51,4 @@ def index(request):
     response = render(request, 'index.html', context)
     response.set_cookie('visits', visits)
     return response
-
-
 

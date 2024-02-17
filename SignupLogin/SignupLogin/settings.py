@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base',
     'myclub',
+    
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'myclub.middleware.RestrictNormalUserFromAdminPanel',
+    'myclub.middleware.RestrictAdminFromFrontend',
+
 ]
 
 ROOT_URLCONF = 'SignupLogin.urls'
@@ -110,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://red-cn24e0gl6cac739ahn90:6379/1',  # Update with your Redis server details
+        'LOCATION': 'redis://127.0.0.1:6379/1',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
@@ -150,3 +154,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+
+
