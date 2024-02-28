@@ -14,21 +14,21 @@ from django.views.decorators.cache import never_cache
 
 
 
-def get_product_list():
-    """
-    Fetches the products either from the cache or the database,
-    and caches the result with a timeout if not already in the cache.
-    """
-    product_list = cache.get('product_list')
+# def get_product_list():
+#     """
+#     Fetches the products either from the cache or the database,
+#     and caches the result with a timeout if not already in the cache.
+#     """
+#     product_list = cache.get('product_list')
 
-    if product_list is None:
-        product_list = (Products.objects.all())
-        cache.set('product_list', product_list, timeout=60)
-        print("Fetched from database and cached.")
-    else:
-        print("Fetched from cache.")
+#     if product_list is None:
+#         product_list = (Products.objects.all())
+#         cache.set('product_list', product_list, timeout=60)
+#         print("Fetched from database and cached.")
+#     else:
+#         print("Fetched from cache.")
 
-    return product_list
+#     return product_list
 
 # @cache_page(timeout=60*1) -if u need to cache the entire page
 
@@ -42,7 +42,8 @@ def index(request):
     visits = int(request.COOKIES.get('visits',0))
     visits+=1
     username = request.user.username 
-    Product_list = get_product_list()
+    # Product_list = get_product_list() if using cache
+    Product_list = Products.objects.all()
     context = {
         'username': username,
         'product_list':Product_list, 
