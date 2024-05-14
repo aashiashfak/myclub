@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-s3*8b(bt*=hbw61w*gx$$cvka3nq-h+o06-ag+-o0v@2n0wmrh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(1)
 
 ALLOWED_HOSTS = ["*"]
 
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'myclub.middleware.RestrictNormalUserFromAdminPanel',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
     # 'myclub.middleware.RestrictAdminFromFrontend',
 
 ]
@@ -70,6 +71,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'base.contexts.my_context',
                 'django.contrib.messages.context_processors.messages',
+                
             ],
         },
     },
@@ -87,6 +89,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Password validation
@@ -141,9 +145,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR,'static'),
+#     os.path.join(BASE_DIR,'staticfiles')
+# ]
+STATIC_ROOT = 'staticfiles'
+
 
 
 # Default primary key field type
